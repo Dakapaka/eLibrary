@@ -1,0 +1,55 @@
+<table>
+    <tr>
+        <td>Naslov:</td>
+        <td>
+            <input type = "text" name = "title" [(ngModel)] = "book.title">
+        </td>
+    </tr>
+    <tr>
+        <td>Autor:</td>
+        <td>
+            <input type = "text" name = "author" [(ngModel)] = "book.author">
+        </td>
+    </tr>
+    <tr>
+        <td>Žanr:</td>
+        <td>
+            <input type = "text" name = "genre" [(ngModel)] = "book.genre">
+        </td>
+    </tr>
+    <tr>
+        <td>Izdavač:</td>
+        <td>
+            <input type = "text" name = "publisher" [(ngModel)] = "book.publisher">
+        </td>
+    </tr>
+    <tr>
+        <td>Godina izdavanja:</td>
+        <td>
+            <input type = "text" name = "year" [(ngModel)] = "book.year">
+        </td>
+    </tr>
+    <tr>
+        <td>Jezik:</td>
+        <td>
+            <input type = "text" name = "language" [(ngModel)] = "book.language">
+        </td>
+    </tr>
+    <tr>
+        <td>Broj knjiga na stanju:</td>
+        <td>
+            <input type = "number" name = "inventory" [(ngModel)] = "book.inventory">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input #slikaUpload type="file" (change)="addPicture($event)" accept="image/jpg, image/png, image/jpeg" [(ngModel)]="book.picture">
+        </td>
+        <img *ngIf="saved" [src]="picturePath()" alt="Red dot" />
+    </tr>
+    <tr>
+        <td colspan="2">
+            <button (click) = 'updateBook()'>Ažuriraj</button>
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,57 @@
+<div>
+    <mat-toolbar>
+        <a (click)="front()">Biblioteka</a>
+    </mat-toolbar>
+</div>
+
+<div style="display: flex; align-items: center; flex-direction: column; min-width: 100%; min-height: 100%; justify-content: center;">
+    <h1>Dodavanje korisnika</h1>
+    <table style="display: flex; align-items: center; flex-direction: column; gap: 10px;">
+        <tr>
+            <td>
+                <input matInput placeholder="Ime" type = "text" name = "firstname" [(ngModel)] = "firstname">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input matInput placeholder="Prezime" type = "text" name = "lastname" [(ngModel)] = "lastname">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input matInput placeholder="Korisničko ime" type = "text" name = "username" [(ngModel)] = "username">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input matInput placeholder="Lozinka" type = "password" name = "password" [(ngModel)] = "password">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input matInput placeholder="Adresa" type = "text" name = "address" [(ngModel)] = "address">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input matInput placeholder="Broj telefona" type = "text" name = "phone" [(ngModel)] = "phone">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input matInput placeholder="I-mejl" type = "text" name = "email" [(ngModel)] = "email">
+            </td>
+        </tr>
+        <tr>
+            <td style="padding-left:15%"> 
+                <input matInput #slikaUpload type="file" (change)="addPicture($event)" accept="image/jpg, image/png, image/jpeg" [(ngModel)]="picture">
+            </td>
+            <img *ngIf="saved" [src]="picturePath()" alt="Red dot" />
+        </tr>
+        <tr>
+            <td colspan="2">
+                <button mat-raised-button (click) = 'register()'>Registracija</button>
+            </td>
+        </tr>
+    </table>
+</div>

@@ -1,0 +1,26 @@
+<div style="min-height: 96%;">
+<div>
+    <mat-toolbar>
+        <a (click)="front()">Biblioteka</a>
+    </mat-toolbar>
+</div>
+
+<table style="margin: 2%;">
+    <tr>
+        <td style="padding: 5px 20px;" (click)="sortByTitle(showIssues)">Naslov</td>
+        <td  style="padding: 5px 20px;"(click)="sortByAuthor(showIssues)">Autor</td>
+        <td  style="padding: 5px 20px;"(click)="sortByIssueDate(showIssues)">Datum zaduživanja</td>
+        <td  style="padding: 5px 20px;"(click)="sortByDeadlineDate(showIssues)">Datum vraćanja knjige</td>
+        <td style="padding: 5px 20px;">Detalji</td>
+    </tr>
+    <tr *ngFor="let i of showIssues">
+        <td style="padding: 5px 20px;">{{i.book}}</td>
+        <td style="padding: 5px 20px;">{{i.author}}</td>
+        <td style="padding: 5px 20px;">{{dateToString(i.issueDate)}}</td>
+        <td style="padding: 5px 20px;">{{dateToString(i.returnDate)}}</td>
+        <td style="padding: 5px 20px;">
+            <button mat-raised-button (click)="getToBook(i)">Detalji o knjizi</button>
+        </td>
+    </tr>
+</table>
+</div>

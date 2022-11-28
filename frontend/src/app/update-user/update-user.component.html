@@ -1,0 +1,49 @@
+<table>
+    <tr>
+        <td>Ime:</td>
+        <td>
+            <input type = "text" name = "firstname" [(ngModel)] = "user.firstname">
+        </td>
+    </tr>
+    <tr>
+        <td>Prezime:</td>
+        <td>
+            <input type = "text" name = "lastname" [(ngModel)] = "user.lastname">
+        </td>
+    </tr>
+    <tr>
+        <td>Korisničko ime:</td>
+        <td>
+            <input type = "text" name = "username" [(ngModel)] = "user.username">
+        </td>
+    </tr>
+    <tr>
+        <td>Adresa:</td>
+        <td>
+            <input type = "text" name = "address" [(ngModel)] = "user.address">
+        </td>
+    </tr>
+    <tr>
+        <td>Kontakt telefon:</td>
+        <td>
+            <input type = "text" name = "phone" [(ngModel)] = "user.phone">
+        </td>
+    </tr>
+    <tr>
+        <td>I-mejl adresa:</td>
+        <td>
+            <input type = "text" name = "email" [(ngModel)] = "user.email">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input #slikaUpload type="file" (change)="addPicture($event)" accept="image/jpg, image/png, image/jpeg" [(ngModel)]="user.picture">
+        </td>
+        <img *ngIf="saved" [src]="picturePath()" alt="Red dot" />
+    </tr>
+    <tr>
+        <td colspan="2">
+            <button (click) = 'updateUser()'>Ažuriraj</button>
+        </td>
+    </tr>
+</table>

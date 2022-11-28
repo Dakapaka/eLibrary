@@ -1,0 +1,57 @@
+<div style="min-height: 96%;">
+<div>
+    <mat-toolbar>
+        <a (click)="start()">Biblioteka</a>
+    </mat-toolbar>
+</div>
+
+<div style="display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 5%; flex-wrap: wrap;">
+    <div style="width: 50%; display: flex; gap: 10px;">
+        <input matInput placeholder="Pretraga..." type="text" name="search" [(ngModel)]="searchParam" style="flex-grow: 1;">
+        <button *ngIf="selected != true" mat-mini-fab (click)="search()"><mat-icon>search</mat-icon></button>
+        <button *ngIf="selected == true" mat-mini-fab (click)="advancedSearch()"><mat-icon>search</mat-icon></button>
+    </div>
+    <div>
+        <mat-checkbox [(ngModel)]="selected">Napredna pretraga</mat-checkbox>
+        <div *ngIf="selected">
+            <mat-form-field>
+                <mat-label>Žanrovi</mat-label>
+                <mat-select multiple [(ngModel)]="searchGenres">
+                <mat-option *ngFor="let g of genreList" [value]="g">{{g}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <br>
+            <input matInput placeholder="Godina od" type="text" name="yearFrom" [(ngModel)]="yearFrom">
+            <br>
+            <input matInput placeholder="Godina do" type="text" name="yearTo" [(ngModel)]="yearTo">
+            <br>
+            <input matInput placeholder="Izdavač" type="text" name="publisher" [(ngModel)]="publisher">
+        </div>
+    </div>
+</div>
+<div style="display: flex; flex-wrap:wrap; justify-content:center">
+<div style="display: flex; flex-direction: column; align-items: center; padding: 2%;" *ngFor="let b of searchedBooks">
+    <mat-card class="example-card" style="width: 350px">
+        <mat-card-header>
+          <mat-card-title>{{b.title}}</mat-card-title>
+          <mat-card-subtitle>{{b.author}}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image [src]="b.picture" height="480" width="300">
+        <mat-card-content>
+            <p>
+              <b>Žanr: </b>{{b.genre}}
+              <br>
+              <b>Izdavač: </b>{{b.publisher}}
+              <br>
+              <b>Godina izdavanja: </b>{{b.year}}
+              <br>
+              <b>Jezik: </b>{{b.language}}
+            </p>
+          </mat-card-content>
+        <mat-card-actions style="display: flex; justify-content: center;">
+          <button mat-raised-button (click)="getToBook(b)">Detalji</button>
+        </mat-card-actions>
+      </mat-card>
+</div>
+</div>
+</div>

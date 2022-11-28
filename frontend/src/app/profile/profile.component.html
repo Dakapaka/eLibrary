@@ -1,0 +1,54 @@
+<div>
+    <mat-toolbar>
+        <a (click)="front()">Biblioteka</a>
+    </mat-toolbar>
+</div>
+
+<b>Ime: </b>{{user.firstname}}
+<br>
+<b>Prezime: </b> {{user.lastname}}
+<br>
+<b>Korisničko ime: </b> {{user.username}}
+<br>
+<b>Kućna adresa: </b> {{user.address}}
+<br>
+<b>Broj telefona: </b> {{user.phone}}
+<br>
+<b>I-mejl adresa: </b> {{user.email}}
+<br>
+<b>Profilna slika: </b>
+<div>
+    <img [src]="user.picture" width="100" height="100">
+</div>
+<button mat-raised-button *ngIf="user.blocked != true" (click)="getToChangePassword()">Promijeni lozinku</button>
+<br>
+<button mat-raised-button *ngIf="user.blocked != true" (click) = "getToUpdateUser()">Ažurirajte svoje podatke</button>
+<hr>
+<h2>Grafikoni</h2>
+<br>
+<h3>Broj pročitanih knjiga po žanru</h3>
+<div class="grafico">
+    <div class="content">
+        <div class="bars" *ngFor="let item of List">
+            <span>{{item.Value}}</span>
+            <div class="bar" [style.background-color]="item.Color" [style.height]='item.Size'></div>
+        </div>
+    </div>
+    <div class="line"></div>
+    <div class="legends">
+        <span *ngFor="let item of List">{{item.Legend}}</span>
+    </div>
+</div>
+<h3>Broj pročitanih knjiga u posljednjih 12 mjeseci</h3>
+<div class="grafico">
+    <div class="content">
+        <div class="bars" *ngFor="let month of ListMonth">
+            <span>{{month.Value}}</span>
+            <div class="bar" [style.background-color]="month.Color" [style.height]='month.Size'></div>
+        </div>
+    </div>
+    <div class="line"></div>
+    <div class="legends">
+        <span *ngFor="let month of ListMonth">{{month.Legend}}</span>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+<div>
+    <mat-toolbar>
+        <a>Biblioteka</a>
+        <span class="example-spacer"></span>
+        <button mat-button (click) = 'getToSearch()'>Pretraga</button>
+        <button mat-button (click) = 'getToLogin()'>Prijava</button>
+        <button mat-button (click) = 'getToRegister()'>Registracija</button>
+    </mat-toolbar>
+</div>
+
+<div style="display: flex; align-items: center; flex-direction: column;">
+    <h2 style="padding: 1% 0;">Top 3 knjige</h2>
+    <mat-card class="example-card" style="padding: 3% 5%;">
+        <mat-card-header>
+          <mat-card-title>{{top3Books[i].title}}</mat-card-title>
+          <mat-card-subtitle>{{top3Books[i].author}}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image [src]="top3Books[i].picture" height="480" width="400">
+        <mat-card-actions style="display: flex; justify-content: space-between;">
+          <button mat-button (click)="prev()">Prethodna</button>
+          <span class="example-spacer"></span>
+          <button mat-button (click)="next()">Sljedeća</button>
+        </mat-card-actions>
+      </mat-card>
+</div>

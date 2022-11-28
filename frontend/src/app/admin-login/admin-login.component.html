@@ -1,0 +1,17 @@
+<div>
+    <mat-toolbar>
+        <a>Biblioteka</a>
+    </mat-toolbar>
+</div>
+
+<div style="display: flex; align-items: center; flex-direction: column; min-width: 100%; min-height: 100%; justify-content: center;">
+    <h1>Prijava na eBiblioteku kao admin</h1>
+    <table style="display: flex; align-items: center; flex-direction: column; gap: 10px;">
+        <input matInput placeholder="Korisničko ime" type="text" name="username" [(ngModel)] = "username">
+        <input matInput placeholder="Lozinka" type="password" name="password" [(ngModel)] = "password">
+        <td colspan="2">
+            <button mat-raised-button (click) = "login()">Prijava</button>
+        </td>
+    </table>
+    <p style="color: red;">{{message}}</p>
+</div>

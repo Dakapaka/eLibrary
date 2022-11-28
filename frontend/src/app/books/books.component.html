@@ -1,0 +1,139 @@
+<div>
+    <mat-toolbar>
+        <a (click)="front()">Biblioteka</a>
+    </mat-toolbar>
+</div>
+
+<div style="display: flex; flex-direction: column; align-items: center;">
+    <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title>{{book.title}}</mat-card-title>
+          <mat-card-subtitle>{{book.author}}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image [src]="book.picture" height="480" width="300">
+        <mat-card-content>
+            <p>
+              <b>Žanr: </b>{{book.genre}}
+              <br>
+              <b>Izdavač: </b>{{book.publisher}}
+              <br>
+              <b>Godina izdavanja: </b>{{book.year}}
+              <br>
+              <b>Jezik: </b>{{book.language}}
+              <br>
+              <b>Broj knjiga na stanju: </b>{{book.inventory}}
+              <br>
+              <b>Prosječna ocjena: </b>{{showRating}}
+            </p>
+          </mat-card-content>
+          <mat-card-actions style="display: flex; justify-content: center;" *ngIf="user != null && user.type != 2 && (user.blocked == false || user.blocked == null)">
+            <button mat-raised-button (click)="issue()">Zaduži</button>
+            <button mat-raised-button (click)="reserve()" *ngIf="showReserve()">Rezerviši</button>
+          </mat-card-actions>
+      </mat-card>
+    <div *ngIf="user.type == 1">
+        <input matInput type="checkbox" name="clicked" (change)="isClicked()" value="true" ([ngModel])="clicked">Ažuriraj knjigu
+    </div>
+    <br>
+    <div *ngIf="this.clicked == true">
+        <table>
+            <tr>
+                <td>Naslov:</td>
+                <td>
+                    <input matInput type = "text" name = "title" placeholder="{{book.title}}" [(ngModel)] = "book.title">
+                </td>
+            </tr>
+            <tr>
+                <td>Autor:</td>
+                <td>
+                    <input matInput type = "text" name = "author" placeholder="{{book.author}}" [(ngModel)] = "book.author">
+                </td>
+            </tr>
+            <tr>
+                <td>Žanr:</td>
+                <td>
+                    <input matInput type = "text" name = "genre" placeholder="{{book.genre}}" [(ngModel)] = "book.genre">
+                </td>
+            </tr>
+            <tr>
+                <td>Izdavač:</td>
+                <td>
+                    <input matInput type = "text" name = "publisher" placeholder="{{book.publisher}}" [(ngModel)] = "book.publisher">
+                </td>
+            </tr>
+            <tr>
+                <td>Godina izdavanja:</td>
+                <td>
+                    <input matInput type = "text" name = "year" placeholder="{{book.year}}" [(ngModel)] = "book.year">
+                </td>
+            </tr>
+            <tr>
+                <td>Jezik:</td>
+                <td>
+                    <input matInput type = "text" name = "language" placeholder="{{book.language}}" [(ngModel)] = "book.language">
+                </td>
+            </tr>
+            <tr>
+                <td>Broj knjiga na stanju:</td>
+                <td>
+                    <input matInput type = "number" name = "inventory" placeholder="{{book.inventory}}" [(ngModel)] = "book.inventory">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input matInput #slikaUpload type="file" (change)="addPicture($event)" accept="image/jpg, image/png, image/jpeg" [(ngModel)]="picture">
+                </td>
+                <img *ngIf="saved" [src]="picturePath()" alt="Red dot" />
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button mat-raised-button (click) = 'updateBook()'>Ažuriraj</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div *ngIf="user != null && user.blocked != true">
+        <textarea maxlength="1000" [(ngModel)]="comment" rows="4" cols="50"></textarea>
+        <br>
+        Ocijeni (1-10): <input matInput type="number" name="commentRating" [(ngModel)]="commentRating">
+        <br>
+        <button mat-raised-button (click)="addComment()">Komentariši</button>
+    </div>
+</div>
+<hr>
+<h2>Komentari čitalaca</h2>
+<br>
+<div *ngIf="showComments.length == 0">
+    Budite prvi da ocijenite ovu knjigu!
+</div>
+<div *ngFor="let c of showComments">
+    <mat-card class="example-card">
+        
+        <mat-card-content style="display: flex; justify-content: center;">
+            <p>
+                <b>Korisničko ime: </b>{{c.user}}
+                <br>
+                <b>Ocjena: </b>{{c.rating}}
+                <br>
+                <b>Komentar: </b>{{c.text}}
+                <br>
+                <b>Datum i vrijeme: </b>{{dateToString(c.date)}}
+                <br>
+                <b style="color: gold;" *ngIf="c.updated">Ažurirano</b>
+            </p>
+          </mat-card-content>
+          <mat-card-actions style="display: flex; justify-content: center;" *ngIf="user != null && (user.blocked == false || user.blocked == null)">
+            <div *ngIf="c.user == user.username">
+                <mat-checkbox [(ngModel)]="updateSelected">Izmijeni komentar</mat-checkbox>
+                <br>
+                <div *ngIf="updateSelected == true" >
+                    <textarea maxlength="1000" [(ngModel)]="updateComment" rows="4" cols="50"></textarea>
+                    <br>
+                    Ocjena: <input type="number" name="updateRating" [(ngModel)]="updateRating">
+                    <br>
+                    <button mat-raised-button (click)="update(c)">Ažuriraj komentar</button>
+                </div>
+            </div>
+          </mat-card-actions>
+        </mat-card>
+</div>

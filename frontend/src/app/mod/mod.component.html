@@ -1,0 +1,47 @@
+<mat-toolbar>
+    <a (click)="logout()">Biblioteka</a>
+    <span class="example-spacer"></span>
+    <button mat-button (click) = 'getToViewHistory()'>Istorija zaduženja</button>
+    <button mat-button (click) = 'getToViewIssued()'>Pregled zaduženja</button>
+    <button mat-button (click) = 'getToRequests()'>Zahtjevi za dodavanje knjiga</button>
+    <button mat-button (click) = 'getToAdd()'>Dodaj knjigu</button>
+    <button mat-button (click) = 'getToSearch()'>Pretraga</button>
+    <button mat-button (click) = 'logout()'>Odjava</button>
+    <div *ngIf="user.picture != null">
+        <a routerLink="/profile">
+            <img [src]="user.picture" width="40" height="40">
+        </a>
+    </div>
+    <div *ngIf="user.picture == null">
+        <a routerLink="/profile">
+            <img [src]="this.picture" width="40" height="40">
+        </a>
+    </div>
+</mat-toolbar>
+<br>
+<div style="display: flex; align-items: center; flex-direction: column; ">
+    <h1 style="margin-top: 2%; ">Knjiga dana</h1>
+    <mat-card class="example-card" style="padding: 2% 4%; margin: 2%;">
+        <mat-card-header>
+          <mat-card-title>{{allBooks[i].title}}</mat-card-title>
+          <mat-card-subtitle>{{allBooks[i].author}}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image [src]="allBooks[i].picture" height="480" width="400">
+        <p>
+            <b>Ocjena: </b>{{allBooks[i].rating}}
+        </p>
+        <mat-card-actions style="display: flex; justify-content: center;">
+        </mat-card-actions>
+      </mat-card>
+</div>
+<div style="display: flex; justify-content:center">
+    <hr style="width: 50%;">
+</div>
+
+<h2>Obavještenja</h2>
+<div *ngFor="let n of notifications">
+    <p>{{n}}</p>
+</div>
+<div *ngFor="let b of booksAdded">
+    <p *ngIf="user.bookAdded">{{b}}</p>
+</div>

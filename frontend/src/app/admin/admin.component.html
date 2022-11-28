@@ -1,0 +1,31 @@
+<div style="min-height: 96%;">
+<mat-toolbar>
+    <a (click)="logout()">Biblioteka</a>
+    <span class="example-spacer"></span>
+    <button mat-button (click) = 'getToAddUser()'>Dodaj korisnika</button>
+    <button mat-button (click) = 'getToAddBook()'>Dodaj knjigu</button>
+    <button mat-button (click) = 'getToAdminUsers()'>Korisnici</button>
+    <button mat-button (click) = 'getToAdminBooks()'>Knjige</button>
+    <button mat-button (click) = 'getToRequests()'>Zahtjevi</button>
+    <button mat-button (click) = 'getToSearch()'>Pretraga</button>
+    <button mat-button (click) = 'logout()'>Odjava</button>
+
+    <div *ngIf="user.picture != null">
+        <a routerLink="/profile">
+            <img [src]="user.picture" width="40" height="40">
+        </a>
+    </div>
+    <div *ngIf="user.picture == null">
+        <a routerLink="/profile">
+            <img [src]="this.picture" width="40" height="40">
+        </a>
+    </div>
+</mat-toolbar>
+<hr>
+<div style="padding: 2%;">
+    Zadaj vrijeme vraćanja: <input style="margin-left: 5px;" type="number" name="deadline" [(ngModel)]="deadline">
+    <br>
+    <button  style="margin-top: 1%;"mat-raised-button (click)="setDeadline()">Potvrdi</button>
+</div>
+    
+</div>

@@ -1,0 +1,33 @@
+<div>
+    <mat-toolbar>
+        <a (click)="front()">Biblioteka</a>
+    </mat-toolbar>
+</div>
+
+<div *ngIf="showIssues.length > 0" style="display: flex; flex-direction: column; align-items: center;">
+    <h1 style="margin: 2%;">Vaša zaduženja</h1>
+    <div *ngFor="let i of showIssues">
+        <mat-card class="example-card">
+            <mat-card-header>
+              <mat-card-title>{{i.book}}</mat-card-title>
+              <mat-card-subtitle>{{i.author}}</mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image [src]="i.picture" height="480" width="300">
+            <mat-card-content>
+                <p>
+                  <b>Broj dana do isteka roka: </b>{{daysLeft(i)}}
+                  <br>
+                    <!-- <b *ngIf="isDeadlinePassed(i)" style="color: red;">Kašnjenje: </b>{{deadlinePassed(i)}} -->
+                </p>
+              </mat-card-content>
+              <mat-card-actions style="display: flex; justify-content: space-between;">
+                <button mat-raised-button (click)="returnBook(i)">Razduži</button>
+                <button mat-raised-button (click)="getToBook(i.bookID)">Detalji</button>
+                <button mat-raised-button *ngIf="alreadyExtended(i) == false && user.blocked != true" (click)="extend(i)">Produži rok vraćanja</button>
+              </mat-card-actions>
+          </mat-card>
+    </div>
+</div>
+<div *ngIf="showIssues.length == 0">
+    Nemate trenutnih zaduženja
+</div>

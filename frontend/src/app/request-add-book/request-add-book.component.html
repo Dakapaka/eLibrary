@@ -1,0 +1,55 @@
+<div>
+    <mat-toolbar>
+        <a (click)="front()">Biblioteka</a>
+    </mat-toolbar>
+</div>
+
+<div style="display: flex; align-items: center; flex-direction: column; min-width: 100%; min-height: 100%; justify-content: center;">
+    <h1>Zahtjev za dodavanje knjige</h1>
+    <table>
+        <tr>
+            <td>
+                <input matInput placeholder="Ime" type = "text" name = "firstname" [(ngModel)] = "title">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input matInput placeholder="Autor" type = "text" name = "lastname" [(ngModel)] = "author">
+            </td>
+        </tr>
+        <tr>
+            <mat-form-field>
+                <mat-label>Žanrovi</mat-label>
+                <mat-select multiple [(ngModel)]="genresToAdd">
+                <mat-option *ngFor="let g of genreList" [value]="g">{{g}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </tr>
+        <tr>
+            <td>
+                <input matInput placeholder="Izdavač" type = "text" name = "password" [(ngModel)] = "publisher">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input matInput placeholder="Godina izdavanja" type = "text" name = "address" [(ngModel)] = "year">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input matInput placeholder="Jezik" type = "text" name = "phone" [(ngModel)] = "language">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input #slikaUpload type="file" (change)="addPicture($event)" accept="image/jpg, image/png, image/jpeg" [(ngModel)]="picture">
+            </td>
+            <img *ngIf="saved" [src]="picturePath()" alt="Red dot" />
+        </tr>
+        <tr>
+            <td colspan="2">
+                <button mat-raised-button (click) = 'add()'>Pošalji</button>
+            </td>
+        </tr>
+    </table>
+</div>

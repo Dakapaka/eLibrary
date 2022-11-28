@@ -1,0 +1,35 @@
+<div>
+    <mat-toolbar>
+        <a (click)="front()">Biblioteka</a>
+    </mat-toolbar>
+</div>
+
+<div style="display: flex; flex-direction: column; align-items: center; min-height: 96vh;">
+    <h2>Zahtjevi za dodavanje:</h2>
+    <div *ngFor="let b of bookRequests">
+        <mat-card class="example-card">
+            <mat-card-header>
+            <mat-card-title>{{b.title}}</mat-card-title>
+            <mat-card-subtitle>{{b.author}}</mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image [src]="b.picture" height="480" width="300">
+            <mat-card-content>
+                <p>
+                <b>Žanr: </b>{{b.genre}}
+                <br>
+                <b>Izdavač: </b>{{b.publisher}}
+                <br>
+                <b>Godina izdavanja: </b>{{b.year}}
+                <br>
+                <b>Jezik: </b>{{b.language}}
+                <br>
+                <b>Korisnik koji je poslao zahtjev: </b>{{b.user}}
+                </p>
+            </mat-card-content>
+            <mat-card-actions style="display: flex; justify-content: center;">
+                <button mat-raised-button (click)="accept(b)">Prihvati</button>
+                <button mat-raised-button (click)="reject(b)">Odbij</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>

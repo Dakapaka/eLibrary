@@ -1,0 +1,39 @@
+<div>
+    <mat-toolbar>
+        <a (click)="front()">Biblioteka</a>
+    </mat-toolbar>
+</div>
+
+<div style="display: flex; flex-direction: column; align-items: center;">
+    <h1 style="margin: 2%;">Korisnici</h1>
+    <div *ngFor="let a of allUsers">
+        <mat-card style="width: 400px; margin: 5%;" class="example-card">
+            <img mat-card-image [src]="a.picture" max-height="480" max-width="300">
+            <mat-card-content>
+                <p>
+                    <b>Ime: </b>{{a.firstname}}
+                    <br>
+                    <b>Prezime: </b>{{a.lastname}}
+                    <br>
+                    <b>Korisničko ime: </b>{{a.username}}
+                    <br>
+                    <b>Lozinka: </b>{{a.password}}
+                    <br>
+                    <b>Adresa: </b>{{a.address}}
+                    <br>
+                    <b>Broj telefona: </b>{{a.phone}}
+                    <br>
+                    <b>I-mejl: </b>{{a.email}}
+                </p>
+              </mat-card-content>
+              <mat-card-actions style="display: flex; justify-content: space-between;">
+                <button mat-raised-button *ngIf="a.type == 1" (click)="chanegPrivileges(a)">Umanji privilegije</button>
+                <button mat-raised-button *ngIf="a.type == 0" (click)="chanegPrivileges(a)">Povećaj privilegije</button>
+                <button mat-raised-button (click)="getToUpdateUser(a)">Ažuriraj</button>
+                <button mat-raised-button (click)="delete(a)" *ngIf="user.type != 2">Obriši</button>
+                <button mat-raised-button *ngIf="a.blocked == false || a.blocked == null" (click)="block(a, true)">Blokiraj</button>
+                <button mat-raised-button *ngIf="a.blocked == true" (click)="block(a, false)">Odblokiraj</button>
+              </mat-card-actions>
+          </mat-card>
+    </div>
+</div>

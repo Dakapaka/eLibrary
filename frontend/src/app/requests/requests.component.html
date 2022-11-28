@@ -1,0 +1,35 @@
+<div>
+    <mat-toolbar>
+        <a (click)="front()">Biblioteka</a>
+    </mat-toolbar>
+</div>
+
+<div style="display: flex; flex-direction: column; align-items: center;">
+    <h1 style="margin: 2%;">Zahtjevi za registraciju</h1>
+    <div *ngFor="let u of userRequests">
+        <mat-card class="example-card" style="width: 400px; margin: 5%;" class="example-card">
+            <img mat-card-image [src]="u.picture" max-height="480" max-width="300">
+            <mat-card-content>
+                <p>
+                    <b>Ime: </b>{{u.firstname}}
+                    <br>
+                    <b>Prezime: </b>{{u.lastname}}
+                    <br>
+                    <b>Korisničko ime: </b>{{u.username}}
+                    <br>
+                    <b>Lozinka: </b>{{u.password}}
+                    <br>
+                    <b>Adresa: </b>{{u.address}}
+                    <br>
+                    <b>Broj telefona: </b>{{u.phone}}
+                    <br>
+                    <b>I-mejl: </b>{{u.email}}
+                </p>
+              </mat-card-content>
+              <mat-card-actions style="display: flex; justify-content: space-between;">
+                <button mat-raised-button (click)="accept(u)">Prihvati</button>
+                <button mat-raised-button (click)="reject(u)">Odbij</button>
+              </mat-card-actions>
+          </mat-card>
+    </div>
+</div>
